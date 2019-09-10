@@ -39,7 +39,7 @@ Now start the Docker stack by running `docker-compose up -d` in your shell. This
 
 Last but not least: open up your domain in the browser and you should see the Flarum setup. Change `localhost` to `db` for the database host and use the credentials from the .env file for the database name, username and password.
 
-### Persisting user avatars
+### Persisting assets and configuration
 
 By default Docker stores all uploaded files and the configuration inside the container. Deleting the container will result in permanent data loss. To prevent this, uncomment the `volumes` section of the flarum service in the `docker-compose.yml` file. Then restart your Docker stack after you completed the Flarum setup.
 
