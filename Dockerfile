@@ -2,7 +2,7 @@
 FROM composer:1.8 AS composer
 WORKDIR /srv
 
-COPY composer.json composer.lock ./
+COPY composer.json ./
 
 RUN composer install --ignore-platform-reqs --no-scripts
 
