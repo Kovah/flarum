@@ -1,0 +1,28 @@
+version: "3"
+services:
+
+  # --- MariaDB 10.3
+  db:
+    image: bitnami/mariadb:10.3
+    restart: unless-stopped
+    environment:
+      - MARIADB_ROOT_PASSWORD=${DB_PASSWORD}
+      - MARIADB_USER=${DB_USERNAME}
+      - MARIADB_PASSWORD=${DB_PASSWORD}
+      - MARIADB_DATABASE=${DB_DATABASE}
+    volumes:
+      - flarum-db:/bitnami
+
+  # --- Flarum including nginx
+  flarum:
+    image: kovah/flarum:latest
+    restart: unless-stopped
+    ports:
+      - 80:80
+    #volumes:
+    #  - ./data/assets:/srv/public/assets:rw
+    #  - ./data/config.php:/srv/config.php:rw
+
+volumes:
+  flarum-db:
+    driver: local
