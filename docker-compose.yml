@@ -21,7 +21,6 @@ services:
       - 80:80
     #volumes:
     #  - ./data/assets:/srv/public/assets:rw
-    #  - ./data/config.php:/srv/config.php:rw
 
 volumes:
   flarum-db:

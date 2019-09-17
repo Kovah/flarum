@@ -39,9 +39,22 @@ Now start the Docker stack by running `docker-compose up -d` in your shell. This
 
 Last but not least: open up your domain in the browser and you should see the Flarum setup. Change `localhost` to `db` for the database host and use the credentials from the .env file for the database name, username and password.
 
-### Persisting assets and configuration
+### Persisting assets and backing up the configuration
 
-By default Docker stores all uploaded files and the configuration inside the container. Deleting the container will result in permanent data loss. To prevent this, uncomment the `volumes` section of the flarum service in the `docker-compose.yml` file. Then restart your Docker stack after you completed the Flarum setup.
+First of all, if Flarum is running, backup your `config.php` file which is necessary to run Flarum. You can run the following command, where flarum_1 is the name of your specific Flarum container
+
+```
+docker exec flarum_1 bash -c "cat config.php" > config.php
+```
+
+To restore the config.php file in case it got lost while upgrading or cleaning up, run the following command while the container is running. Again, flarum_1 needs to be replaced with the name of your container.
+
+```
+docker cp config.php flarum_1:/srv/config.php
+```
+
+By default Docker stores all uploaded files and the configuration inside the container. Deleting the container will result in permanent data loss. To prevent this, uncomment the `volumes` section of the flarum service in the `docker-compose.yml` file. Then restart your Docker stack after you completed the Flarum setup.  
+Make sure that the `./data/assets` directory is writable, otherwise your won't be able to save any new avatars.
 
 ### Setup a reverse proxy to your Docker container
 
